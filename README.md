@@ -1,5 +1,6 @@
 # 14-Bit-Circular-Coded-Target
-14-Bit-Circular-Coded-Target (Schneider 1991)
+
+Schneider, C. T. “3-D Vermessung von Oberflächen und Bauteilen durch Photogrammetrie und Bildverarbeitung.” Proc. IDENT/VISION 91 (1991): 14-17
 
 Implementation of coding scheme of (expired) patent DE19733466A1.
 https://patents.google.com/patent/DE19733466A1/
