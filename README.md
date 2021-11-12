@@ -18,3 +18,6 @@ Domain Dedication: https://creativecommons.org/publicdomain/zero/1.0/
 - generate the ring codes find_codes.py
 - generate a set of printable targets create-target_sheets.py
 - generates 516 targets
+
+----
+Detect and decode the Circular Coded Targets: https://github.com/poxiao2/CCTDecode
