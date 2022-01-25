@@ -20,7 +20,7 @@ import numpy as np
 
 import find_codes
 
-UNIT = 'in'         # SVG unit
+UNIT = 'in'         # SVG unit 'in' or 'mm'
 WIDTH = 8.5         # Page width
 HEIGHT = 11         # Page height
 DOT_DIAMETER = 0.4  # Diameter of dot at center of target
