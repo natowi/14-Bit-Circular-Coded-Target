@@ -12,13 +12,13 @@ This script is released into the public domain using the CC0 1.0 Public
 Domain Dedication: https://creativecommons.org/publicdomain/zero/1.0/
 '''
 
-import subprocess
-import tempfile
-import os.path
-import math
-import numpy as np
+import subprocess   # Used to run external commands
+import tempfile     # Used to create temporary directory
+import os.path      # Used to manipulate file paths
+import math         # Used for mathematical operations
+import numpy as np  # Used for mathematical operations
 
-import find_codes
+import find_codes   # Custom module for generating binary codes
 
 UNIT = 'in'         # SVG unit 'in' or 'mm'
 WIDTH = 8.5         # Page width
@@ -31,14 +31,16 @@ Y_MARGIN = 0.9      # Y-axis page margin for targets
 BACKGROUND_X_MARGIN = 0.25  # X-axis page margin for black background
 BACKGROUND_Y_MARGIN = 0.5   # Y-axis page margin for black background
 CODES = find_codes.generate_codes(14)   # Codes for targets
-FILENAME = 'targets.pdf'
+FILENAME = 'targets.pdf'    # Name of output PDF file
 
 def add_target(x_center, y_center, dot_radius, code, code_num, first_segment):
     '''
     Returns SVG data for a given target.
     '''
+    # Define a white circle at the center of the target
     out = '<circle fill="#fff" cx="{}" cy="{}" r="{}"/>\n'.format(x_center, \
         y_center, dot_radius)
+    # Define the lines forming the outer shape of the target
     out += '<g stroke="#fff" stroke-width="{}" fill="none">\n'.format( \
         dot_radius)
     for i in range(14):
@@ -51,6 +53,9 @@ def add_target(x_center, y_center, dot_radius, code, code_num, first_segment):
                 * dot_radius * 2.5 - y_start
             x_start += x_center
             y_start += y_center
+            # Define a line segment in the SVG path element
+            # The path element is used to define a shape as a series of lines, curves and arcs
+            # https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
             out += '<path fill="#fff" d="m{} {}a{} {} 0 0 1 {} {}"' \
                 ' {}/>\n'.format(x_start, y_start, dot_radius * 2.5, \
                 dot_radius * 2.5, x_end, y_end, \
@@ -63,6 +68,7 @@ def add_target(x_center, y_center, dot_radius, code, code_num, first_segment):
         y_center + dot_radius * 3, dot_radius / 2, code_num + 1)
     return out
 
+# Generate SVG code for sheet of targets
 def create_sheet(n, pdf_filename):
     '''
     Constructs SVG file for sheet of targets and then uses Inkscape to combine
@@ -86,7 +92,7 @@ def create_sheet(n, pdf_filename):
                                   DOT_DIAMETER / 2, CODES[num], num,
                                   i == 0 and j == 0)
     svg += '</svg>'
-
+    # Write SVG file to temporary directory and use Inkscape to convert it to PDF
     svg_filename = os.path.join(tmp_dir, 'sheet.svg')
     with open(svg_filename, 'w') as out_file:
         out_file.write(svg)
