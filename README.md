@@ -19,5 +19,7 @@ Domain Dedication: https://creativecommons.org/publicdomain/zero/1.0/
 - generate a set of printable targets create-target_sheets.py
 - generates 516 targets
 
+Constructs SVG file for sheet of targets and then uses Inkscape to combine adjacent target segments into a single path and to export a PDF.
+
 ----
 Detect and decode the Circular Coded Targets: https://github.com/poxiao2/CCTDecode
