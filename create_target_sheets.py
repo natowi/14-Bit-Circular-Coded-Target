@@ -96,11 +96,13 @@ def create_sheet(n, pdf_filename):
     svg_filename = os.path.join(tmp_dir, 'sheet.svg')
     with open(svg_filename, 'w') as out_file:
         out_file.write(svg)
-    subprocess.run(['inkscape', '-g', '--select=first',
-                    '--verb', 'EditSelectSameObjectType',
-                    '--verb', 'StrokeToPath', '--verb', 'SelectionUnion',
-                    '--verb', 'FileSave', '--verb', 'FileQuit', svg_filename])
-    subprocess.run(['inkscape', '--export-pdf=' + pdf_filename, svg_filename])
+    subprocess.run(['inkscape', '-g', '--without-gui' , '--select=first',
+                    '--actions', 'EditSelectSameObjectType',
+                    '--actions', 'StrokeToPath',
+                    '--actions', 'SelectionUnion',
+                    '--actions', 'FileSave',
+                    '--actions', 'FileQuit', svg_filename])
+    subprocess.run(['inkscape', '--export-filename=' + pdf_filename, svg_filename])
 
 with tempfile.TemporaryDirectory() as tmp_dir:
     # Create sheets of targets in temporary directory
